@@ -1,5 +1,63 @@
+* {
+   margin: 0;
+   padding: 0;
+   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 canvas {
    position:fixed;
    top: 0;
    left: 0;
 }
+
+body {
+   display:flex;
+   background: black;
+   min-height: 100vh;
+}
+
+.navbar {
+   position: fixed;
+   top: 24px;
+   left: 50%;
+   transform: translateX(-50%);
+   width: 60%;
+   background: rgba(255, 255, 255, 0.03);
+   backdrop-filter: blur(12px);
+   -webkit-backdrop-filter: blur(12px);
+   border: 1px solid rgba(255, 255, 255, 0.08);
+   border-radius: 16px;
+   padding: 24px;
+   z-index: 1000;
+   display: flex;
+   justify-content: center;
+}
+
+.navbar ul {
+   list-style-type: none;
+   display: flex;
+   justify-content: space-evenly;
+   width: 100%;
+}
+.navbar ul li {
+   display:flex
+}
+.navbar a {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: white;
+   text-decoration: none;
+}
+
+.navbar a:hover {
+   background: hsl(0, 0%, 10%);
+}
+
+
+
+
