@@ -1,11 +1,10 @@
-* {
+*, *::before, *::after {
+   display: flex;
+   box-sizing: border-box;
    margin: 0;
    padding: 0;
    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-}
-
-*, *::before, *::after {
-  box-sizing: border-box;
+   justify-content: center;
 }
 
 canvas {
@@ -31,31 +30,28 @@ body {
    -webkit-backdrop-filter: blur(12px);
    border: 1px solid rgba(255, 255, 255, 0.08);
    border-radius: 16px;
-   padding: 24px;
    z-index: 1000;
-   display: flex;
-   justify-content: center;
+   overflow: hidden;
 }
 
 .navbar ul {
    list-style-type: none;
-   display: flex;
-   justify-content: space-evenly;
-   width: 100%;
+   flex: 1;
 }
+
 .navbar ul li {
-   display:flex
+   flex: 1;
 }
+
 .navbar a {
-   display: flex;
-   align-items: center;
-   justify-content: center;
+   flex: 1;
    color: white;
    text-decoration: none;
+   padding: 24px;
 }
 
 .navbar a:hover {
-   background: hsl(0, 0%, 10%);
+   background: hwb(0 10% 90% / 0.5);
 }
 
 
