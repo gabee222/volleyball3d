@@ -1,5 +1,15 @@
-*, *::before, *::after {
-   display: flex;
+:root{
+   /* Colors (hue = 202)*/
+   --bg: hsl(202 10% 92%);
+   --surface:  hsl(202 65% 86%);
+   --surface-dark: hsl(202 65% 76%);
+   --accent: hsl(202 84% 54%);
+   --accent-dark: hsl(202 84% 40%);
+   --text: hsl(202 84% 10%);
+   --navbar: hsl(202 65% 86% / 0.7);
+   --navbar-dark: hsl(202 65% 76% / 0.5);
+}
+* {
    box-sizing: border-box;
    margin: 0;
    padding: 0;
@@ -7,16 +17,19 @@
    justify-content: center;
 }
 
-canvas {
-   position:fixed;
-   top: 0;
-   left: 0;
+body {
+   background: var(--bg);
+   color: var(--text);
+   max-width: 50rem;
+   margin: auto;
 }
 
-body {
-   display:flex;
-   background: black;
-   min-height: 100vh;
+div {
+   display: block;
+}
+
+#content {
+   padding-top: 100px;
 }
 
 .navbar {
@@ -24,36 +37,49 @@ body {
    top: 24px;
    left: 50%;
    transform: translateX(-50%);
-   width: 60%;
-   background: rgba(255, 255, 255, 0.03);
+   width: min(50rem, 100vw - 48px);
+   background: var(--navbar);
    backdrop-filter: blur(12px);
    -webkit-backdrop-filter: blur(12px);
-   border: 1px solid rgba(255, 255, 255, 0.08);
+   border: 1px solid var(--text);
    border-radius: 16px;
    z-index: 1000;
    overflow: hidden;
 }
-
-.navbar ul {
-   list-style-type: none;
-   flex: 1;
-}
-
-.navbar ul li {
-   flex: 1;
+.navbar * {
+   display:flex;
+   flex:1;
 }
 
 .navbar a {
-   flex: 1;
-   color: white;
+   color: var(--text);
    text-decoration: none;
    padding: 24px;
 }
 
 .navbar a:hover {
-   background: hwb(0 10% 90% / 0.5);
+   background: var(--navbar-dark);
 }
 
+.navbar ul {
+   list-style: none;
+   display: flex;
+   justify-content: space-between;
+}
 
+canvas {
+   overflow-clip-margin: content-box;
+   overflow: clip;
+}
 
+.five-one {
+   aspect-ratio: 16 / 9;
+}
 
+.five-one canvas {
+   width: 100%;
+   height: 100%;
+   display: block;
+   cursor:grab;
+   border-radius: 16px;
+}
