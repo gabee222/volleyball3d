@@ -4,16 +4,16 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
+// Scene setup
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('black')
 const canvas = document.querySelector('#scene-canvas')
 const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000)
 
 const renderer = new THREE.WebGLRenderer({
-  canvas,
-})
+  canvas})
 
-camera.position.setZ(30)
+camera.position.set(11, 6, -6)
 
 // Match the drawing buffer to the canvas's displayed size × device pixel ratio.
 // Returns true when a resize actually happened. Capping DPR at 2 keeps it
