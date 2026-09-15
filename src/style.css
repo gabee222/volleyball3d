@@ -76,6 +76,7 @@ canvas {
 }
 
 .five-one {
+   position: relative;
    aspect-ratio: 16 / 9;
 }
 
@@ -85,4 +86,11 @@ canvas {
    display: block;
    cursor:grab;
    border-radius: 16px;
+}
+
+.info-box{
+   color: var(--accent);
+   position: absolute;
+   top: 24px;
+   left: 50%;
 }
