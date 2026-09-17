@@ -1,5 +1,6 @@
 import './style.css'
 
+import PickHelper from './pickhelper.js';
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -55,18 +56,49 @@ loader.load(
 )
 
 // Add grids for scale
-const gridHelper = new THREE.GridHelper(200, 50)
-scene.add(gridHelper)
+// const gridHelper = new THREE.GridHelper(200, 50)
+// scene.add(gridHelper)
 
 // Add Mouse movements to control 3d model
 const controls = new OrbitControls(camera, renderer.domElement)
 controls.enableDamping = true
 
+const pickedPosition = {x: 0, y: 0}
+clearPickPosition();
+
+function getCanvasRelativePosition(event) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+        x: (event.clientX - rect.left) * canvas.width / rect.width,
+        y: (event.clientY - rect.top) * canvas.height / rect.height,
+    };
+}
+
+function setPickPosition(event) {
+    const pos = getCanvasRelativePosition(event);
+    pickedPosition.x = (pos.x / canvas.width ) * 2 - 1;
+    pickedPosition.y = (pos.y / canvas.height) * -2 + 1;
+}
+function clearPickPosition() {
+  // unlike the mouse which always has a position
+  // if the user stops touching the screen we want
+  // to stop picking. For now we just pick a value
+  // unlikely to pick something
+  pickedPosition.x = -100000;
+  pickedPosition.y = -100000;
+}
+
+canvas.addEventListener('mousemove', setPickPosition);
+canvas.addEventListener('mouseout', clearPickPosition);
+canvas.addEventListener('mouseleave', clearPickPosition);
+
+
 // Add Text to integrate with 3d model
-const textBox = "BOOM"
-document.getElementById("five-one-box").innerText = textBox;
+const pickHelper = new PickHelper();
+
 function animate() {
-    requestAnimationFrame(animate)
+    document.getElementById("five-one-box").innerText = pickHelper.pick(pickedPosition, scene, camera);
+    requestAnimationFrame(animate).toString();
     resizeCanvasToDisplaySize();
     controls.update()
     renderer.render(scene, camera)

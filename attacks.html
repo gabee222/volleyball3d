@@ -7,13 +7,25 @@
     <title>volleyball3d</title>
   </head>
   <body>
-    <nav class="navbar">
-        <ul>
-            <li><a href="index.html" class = 'nav-item' style="width:25%">Positions</a></li>
-            <li><a href="attacks.html" class = 'nav-item'>Attacks</a></li>
-            <li><a href="defenses.html" class = 'nav-item'>Defenses</a></li>
-            <li><a href="about.html" class = 'nav-item'>Introduction</a></li>
-        </ul>
-    </nav>
+    <div>
+      <nav class="navbar">
+          <ul>
+              <li><a href="attacks.html" class = 'nav-item'>Attack</a></li>
+              <li><a href="defenses.html" class = 'nav-item'>Defense</a></li>
+              <li><a href="index.html" class = 'nav-item'>Introduction</a></li>
+          </ul>
+      </nav>
+    </div>
+    <div id="content">
+      <h1>5-1 Position</h1>
+      <div class="five-one">
+        <canvas id="scene-canvas"></canvas>
+        <p id="five-one-box" class="info-box">test</p>
+      </div>
+      <p>The 5-1 system is the most common volleyball formation. The "5" represents five attackers (Outside, Opposite, and Middle hitters), 
+        and the "1" is a single, dedicated setter who runs the offense in all six rotations. It offers highly consistent sets and better team
+        chemistry, though the setter must be able to play both front and back rows.</p>
+    </div>
+    <script type="module" src="/src/attack.js"></script>
   </body>
 </html>
