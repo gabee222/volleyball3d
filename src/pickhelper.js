@@ -16,8 +16,11 @@ export default class PickHelper {
             //     this.pickedObject = intersectedObjects[i].object;
             //     i++;
             // }
-            return this.pickedObject.name;
+            if (this.pickedObject.name.includes("Player")){
+                console.log(this.pickedObject);
+                return this.pickedObject.name;
+            }
         }
-        return "Nothing"
+        return ""
     }
 }

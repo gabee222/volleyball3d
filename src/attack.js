@@ -11,7 +11,7 @@ scene.background = new THREE.Color('black')
 const canvas = document.querySelector('#scene-canvas')
 const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000)
 
-const renderer = new THREE.WebGLRenderer({canvas});
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
 
 renderer.setSize(canvas.innerWidth, canvas.innerHeight);
 camera.position.set(11, 6, -6)
@@ -55,6 +55,9 @@ loader.load(
     }
 )
 
+// Add Players to Player class
+
+
 // Add grids for scale
 // const gridHelper = new THREE.GridHelper(200, 50)
 // scene.add(gridHelper)
@@ -97,11 +100,22 @@ canvas.addEventListener('mouseleave', clearPickPosition);
 const pickHelper = new PickHelper();
 
 function animate() {
-    document.getElementById("five-one-box").innerText = pickHelper.pick(pickedPosition, scene, camera);
+    updateBox();
     requestAnimationFrame(animate).toString();
     resizeCanvasToDisplaySize();
     controls.update()
     renderer.render(scene, camera)
 }
 
+function updateBox(){
+    var infoBox = document.getElementById("five-one-box");
+    var playerInfo = infoBox.innerText;
+    playerInfo = pickHelper.pick(pickedPosition, scene, camera);
+    infoBox.innerText = playerInfo;
+    if (playerInfo === ""){
+        infoBox.style.display = "none";
+    } else {
+        infoBox.style.display = "";
+    }
+}
 animate();
