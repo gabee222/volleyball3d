@@ -43,11 +43,12 @@ scene.add(sun)
 
 let model;
 const loader = new GLTFLoader();
-loader.load(
+await loader.load(
     "/src/court.glb",
     (gltf) => {
         model = gltf.scene;
         scene.add(model);
+        loadPlayers();
     },
     undefined,
     (error) => {
@@ -56,7 +57,21 @@ loader.load(
 )
 
 // Add Players to Player class
+const foundObjects = [];
 
+// 2. Traverse the scene and check your custom userData property
+function loadPlayers(){
+    scene.traverse((child) => {
+        // Check if the object has your custom property and matches the value
+        if (child.userData && child.userData['Player'] === true) {
+            foundObjects.push(child);
+        }
+    });
+    console.log('Scene Information: ', scene.children);
+    console.log(foundObjects);
+}
+
+// console.log(foundObjects)
 
 // Add grids for scale
 // const gridHelper = new THREE.GridHelper(200, 50)

@@ -17,7 +17,7 @@ export default class PickHelper {
             //     i++;
             // }
             if (this.pickedObject.name.includes("Player")){
-                console.log(this.pickedObject);
+                // console.log(this.pickedObject);
                 return this.pickedObject.name;
             }
         }
