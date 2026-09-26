@@ -1,6 +1,7 @@
 import './style.css'
 
 import PickHelper from './pickhelper.js';
+import Player from './player.js';
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -43,32 +44,38 @@ scene.add(sun)
 
 let model;
 const loader = new GLTFLoader();
-await loader.load(
-    "/src/court.glb",
-    (gltf) => {
-        model = gltf.scene;
-        scene.add(model);
-        loadPlayers();
-    },
-    undefined,
-    (error) => {
-        console.error("Load failed:", error)
-    }
-)
+// loader.load(
+//     "/src/court.glb",
+//     (gltf) => {
+//         model = gltf.scene;
+//         scene.add(model);
+//         loadPlayers();
+//     },
+//     undefined,
+//     (error) => {
+//         console.error("Load failed:", error)
+//     }
+// )
+const gltf = await loader.loadAsync("/src/court.glb");
+scene.add(gltf.scene);
 
 // Add Players to Player class
-const foundObjects = [];
+const playerObjects = [];
+const playerMap = new Map();
 
-// 2. Traverse the scene and check your custom userData property
+loadPlayers();
 function loadPlayers(){
     scene.traverse((child) => {
-        // Check if the object has your custom property and matches the value
         if (child.userData && child.userData['Player'] === true) {
-            foundObjects.push(child);
+            playerObjects.push(child);
         }
     });
-    console.log('Scene Information: ', scene.children);
-    console.log(foundObjects);
+    for (const playerObject of playerObjects){
+        let playerProp = playerObject.userData;
+        const player = new Player(playerProp['name'], playerProp['Position'], playerProp['Team']);
+        playerMap.set(player._name, player);
+        console.log(String(player));
+    }
 }
 
 // console.log(foundObjects)
@@ -126,7 +133,12 @@ function updateBox(){
     var infoBox = document.getElementById("five-one-box");
     var playerInfo = infoBox.innerText;
     playerInfo = pickHelper.pick(pickedPosition, scene, camera);
-    infoBox.innerText = playerInfo;
+    // console.log(playerMap.get(playerInfo));
+    if (playerMap.get(playerInfo) !== undefined){
+        console.log(playerMap.get(playerInfo));
+        infoBox.innerText = String(playerMap.get(playerInfo));
+    }
+
     if (playerInfo === ""){
         infoBox.style.display = "none";
     } else {

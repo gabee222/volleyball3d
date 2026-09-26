@@ -1,16 +1,24 @@
-class Player {
-    constructor (id, position, team) {
-        this.id = id;
-        this.position = position;
-        this.team = team;
+export default class Player {
+    constructor (name, position, team) {
+        this._name = name;
+        this._position = position;
+        this._team = team;
     }
-    get id() {
-        return this.id;
+
+
+    toString() {
+        return `Name: ${this._name}
+        Position: ${this._position}
+        Team: ${this._team}`;
+    }
+    get name() {
+        return this._name;
     }
     get position () {
-        return this.position;
+        return this._position;
     }
     get team () {
-        return this.team;
+        return this._team;
     }
+
 }
